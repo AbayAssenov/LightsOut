@@ -62,10 +62,16 @@ public class EstimateProcessorServiceImpl implements EstimateProcessorService {
                     Board tempBoard;
                     CoordinatePoint currentCoordinatePoint = new CoordinatePoint(j, i);
                     tempBoard = applyPiece(piece, currentCoordinatePoint, board, depth);
-                    Double percentage = getPercentageSolve(tempBoard);
 
-                    if (!found)
+                    Double percentage = 0.0;
+
+                    if (pieces.isEmpty()) { // get percentage only on last piece
+                        percentage = getPercentageSolve(tempBoard);
+                    }
+
+                    if (!found) {
                         coordinatePoints.put(piece, currentCoordinatePoint);
+                    }
 
                     if (percentage.equals(MAX_SUITABLE_PERCENT)) {
                         found = true;
